@@ -1,0 +1,9 @@
+apiVersion: civil/v1
+kind: Composition
+metadata:
+  id: test
+spec:
+  nodes: []
+  edges: []
+layout:
+  nodes: {}
