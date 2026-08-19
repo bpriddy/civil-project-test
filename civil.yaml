@@ -1,6 +1,3 @@
 apiVersion: civil/v1
 kind: Project
-metadata:
-  id: test
-spec:
-  composition: app.yaml
+# civil is canon
