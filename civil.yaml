@@ -1,0 +1,9 @@
+apiVersion: civil/v1
+kind: Project
+metadata:
+  id: civil-project-test
+  name: civil-project-test
+spec:
+  # The composition canvas: the top level of this project.
+  composition: app.yaml
+  language: python

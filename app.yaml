@@ -1,0 +1,51 @@
+apiVersion: civil/v1
+kind: Composition
+metadata:
+  id: civil-project-test
+  name: civil-project-test
+
+# The composition canvas. Four node types live here — clients, boundaries,
+# services and processes — and edges mean depends-on or routes-to, never dataflow.
+spec:
+  nodes:
+    - id: api-client-2
+      type: boundary
+      boundary: api
+      exposes: []
+    - id: service
+      type: service
+      impl: { entrypoint: src/services/service.py }
+    - id: process
+      type: process
+      trigger: { kind: schedule, cron: 0 3 * * * }
+      calls: []
+    - id: service-2
+      type: service
+      impl: { entrypoint: src/services/service_2.py }
+    - id: service-3
+      type: service
+      impl: { graph: graphs/service_3.graph.yaml }
+    - id: web
+      type: client
+      client: web
+      path: web
+  edges:
+    - id: c1
+      kind: depends-on
+      from: { node: service }
+      to: { node: service-2 }
+    - id: c2
+      kind: routes-to
+      from: { node: api-client-2 }
+      to: { node: service-2 }
+
+# Layout is a sibling of spec, never inside it, so moving a node never produces a
+# diff that looks like a change to what the application is.
+layout:
+  nodes:
+    api-client-2: { x: 60, y: 420 }
+    service: { x: 59, y: 180 }
+    process: { x: 210, y: 71 }
+    service-2: { x: 493, y: 314 }
+    service-3: { x: 419, y: 142 }
+    web: { x: -229, y: 152 }

@@ -1,0 +1,11 @@
+apiVersion: civil/v1
+kind: Graph
+metadata: { id: service-3 }
+
+# An empty canvas. Descend into the node to build it.
+spec:
+  nodes: []
+  edges: []
+
+layout:
+  nodes: {}
